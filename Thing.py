@@ -21,4 +21,6 @@ class Thing():
     def setPos(self, x, y):
         self.__pos = [x, y]
 
-
+    def move(self, dx, dy):
+        self.__pos[0] += dx
+        self.__pos[1] += dy
