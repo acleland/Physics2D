@@ -21,7 +21,11 @@ class vector():
     # Vector addition - Use regular '+' syntax. E.g. v1 + v2
     def __add__(self, other):
         return vector(self.x + other.x, self.y + other.y)
-    
+
+    # Vector subtraction
+    def __sub__(self, other):
+        return vector(self.x - other.x, self.y - other.y)
+
     # Dot product
     def dot(self, other):
         return self.x * other.x + self.y * other.y
@@ -31,15 +35,23 @@ class vector():
         return math.sqrt(self.x**2 + self.y**2)
     
     # Return angle between two vectors
-    def ang(self, other, unit='radians'):
-        if  unit == 'radians':
-            return acos(self.dot(other) / (self.mag() * other.mag()))
+    def ang(self, other, unit='r'):
+        angle = acos(self.dot(other) / (self.mag() * other.mag()))
+        if unit == 'r':    # default is radians
+            return angle
+        elif unit == 'd':     # convert to degrees if specified
+            return 360 / (2*math.pi)
     
     # Scalar multiplication - Use '*' syntax with scalar after vector E.g. v*3
     def __mul__(self, scalar):
-        return vec(scalar * self.x, scalar * self.y)
+        return vector(scalar * self.x, scalar * self.y)
+
+    # Scalar division - Use v/scalar
+    def __truediv__(self, scalar):
+        return  vector(self.x / scalar, self.y / scalar)
 
     # Increment by (dx, dy)
     def inc(self, dx, dy):
         self.x += dx
         self.y += dy
+    
