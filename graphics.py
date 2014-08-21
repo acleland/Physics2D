@@ -14,7 +14,7 @@ radius = 10
 
 n = int(input('Number of bodies: '))
 gravity = float(input('Set gravity: '))
-
+collisions_on = 'y' == input('Collision detection? (y/n?): ')
 screen = pygame.display.set_mode(size)
 
 # Initialize bodies
@@ -32,12 +32,13 @@ while True:
         pos = round(body.pos.x), round(body.pos.y)
         body.update(dt=.1)
         
-        # Check for collisions
-        for other in bodies:
-            # Don't compare a body to itself
-            if other == body:
-                continue
-            body.overlaps(other)
+        if collisions_on:
+            # Check for collisions
+            for other in bodies:
+                # Don't compare a body to itself
+                if other == body:
+                    continue
+                body.overlaps(other)
 
             
         
