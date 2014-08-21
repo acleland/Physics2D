@@ -10,7 +10,7 @@ pygame.init()
 
 # Constants:
 size = width, height = 640, 480
-speed = vx, vy = 2, 2
+vmax = 2
 black = 0, 0, 0
 blue = 0, 0, 255
 radius = 10
@@ -23,9 +23,9 @@ screen = pygame.display.set_mode(size)
 
 # Initialize bodies
 bodies = []
-for _ in range(n):
+for i in range(n):
     bodies.append(Ball(r=radius, x=random()*width, y=random()*height,
-                    vx=random()*vx, vy=random()*vy, ay=gravity))
+                    vx=random()*vmax, vy=random()*vmax, ay=gravity))
 
 # Draw bodies and animate them:
 while True:
