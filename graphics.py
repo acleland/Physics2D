@@ -51,7 +51,9 @@ while True:
                 if other == body:
                     continue
                 # Fix overlaps
-                body.overlaps(other)
+                if body.overlaps(other):
+                    body.collide(other)
+
 
         # Bounce off edges
         if body.left < 0 or body.right > width:

@@ -62,8 +62,34 @@ class Ball(Body):
             other.pos += vecdiff / dist * overlap/2
         
         return overlapping
+    
+    def collide(self, other):
+        # Bodies bounce off each other, conserving momentum and energy
+        
+        # Radial unit vector
+        ur = (other.pos - self.pos)/(other.pos - self.pos).mag()
 
-
+        # Tangential unit vector
+        ut = vector(-ur.y, ur.x)
+    
+        # Break velocities into radial and tangential components
+        vel_r_self = self.vel.dot(ur)
+        vel_t_self = self.vel.dot(ut)
+        vel_r_other = other.vel.dot(ur)
+        vel_t_other = other.vel.dot(ut)
+        
+        # Tangential components are not affected by collision
+        # New radial velocities are given by
+        new_vel_r_self = (vel_r_self * (self.mass - other.mass) + \
+                            2 * other.mass * vel_r_other)/ \
+                            (self.mass + other.mass)
+        new_vel_r_other = (vel_r_other * (other.mass - self.mass) + \
+                            2 * self.mass * vel_r_self)/ \
+                            (self.mass + other.mass)
+        
+        # Combine to get the new total velocities
+        self.vel = ur*new_vel_r_self + ut*vel_t_self
+        other.vel = ur*new_vel_r_other + ut*vel_t_other
 
 if __name__ == '__main__':
     body = Body(1,2)
