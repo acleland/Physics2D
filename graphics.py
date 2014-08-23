@@ -2,9 +2,10 @@
 # Graphics prototype for Physics 2D
 
 import sys, pygame
+import random
 from Bodies import *
 from vector import *
-from random import random
+
 
 pygame.init()
 
@@ -24,8 +25,14 @@ screen = pygame.display.set_mode(size)
 # Initialize bodies
 bodies = []
 for i in range(n):
-    bodies.append(Ball(r=radius, x=random()*width, y=random()*height,
-                    vx=random()*vmax, vy=random()*vmax, ay=gravity))
+    bodies.append(Ball(r=radius, x=random.random()*width, 
+                        y=random.random()*height, 
+                        vx=random.uniform(-1,1)*vmax, 
+                        vy=random.uniform(-1,1)*vmax, ay=gravity))
+
+# Insert super heavy ball :)
+bodies.append(Ball(r=radius, mass=2, x=random.random()*width, y=random.random()*height,
+                vx=random.uniform(-1,1)*vmax, vy=random.uniform(-1,1)*vmax, ay=gravity))
 
 # Draw bodies and animate them:
 while True:
