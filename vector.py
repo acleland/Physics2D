@@ -13,7 +13,11 @@ class vector():
     def setVector(self, vx, vy):
         self.x = vx
         self.y = vy
-
+    
+    # Return vector as a tuple
+    def tuple(self):
+        return (self.x, self.y)
+        
     # Print the vector neatly
     def print(self):
         print('(' + str(self.x) + ', ' + str(self.y) + ')') 
