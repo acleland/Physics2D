@@ -6,15 +6,20 @@ import random
 from Bodies import *
 from vector import *
 
-
+# Initialize pygame and pygame clock
 pygame.init()
+clock = pygame.time.Clock()
 
 # Constants:
 size = width, height = 640, 480
-vmax = 2
+vmax = .5 * width   # pixels per second
 black = 0, 0, 0
 blue = 0, 0, 255
+white = 255, 255, 255
 radius = 10
+bgcolor = black
+ballcolor = white
+maxfps = 100
 
 # User input:
 n = int(input('Number of bodies: '))
@@ -30,18 +35,18 @@ for i in range(n):
                         vx=random.uniform(-1,1)*vmax, 
                         vy=random.uniform(-1,1)*vmax, ay=gravity))
 
-# Insert super heavy ball :)
-bodies.append(Ball(r=radius, mass=2, x=random.random()*width, y=random.random()*height,
-                vx=random.uniform(-1,1)*vmax, vy=random.uniform(-1,1)*vmax, ay=gravity))
-
 # Draw bodies and animate them:
 while True:
+    # get time passed, limit frame rate
+    delta_t = clock.tick(maxfps)
     # GUI exit
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT: 
+            print(clock.get_fps())
+            sys.exit()
     
     # Start by filling in the background color
-    screen.fill(black)
+    screen.fill(bgcolor)
 
     # Draw the bodies
     for body in bodies:
@@ -49,7 +54,9 @@ while True:
         pos = round(body.pos.x), round(body.pos.y)
         
         # Move body according to current velocity, acceleration
-        body.update(dt=.1)
+        body.update(dt=delta_t / 1000)   # converting ms to secs
+
+
         
         if collisions_on:
             # Check for collisions
@@ -77,7 +84,7 @@ while True:
                 body.setPos(body.pos.x, height - body.radius)
         
         # Draw the body
-        pygame.draw.circle(screen, blue, pos, round(body.radius))
+        pygame.draw.circle(screen, ballcolor, pos, round(body.radius))
 
     #screen.blit(ball, ballrect)
     pygame.display.flip()
