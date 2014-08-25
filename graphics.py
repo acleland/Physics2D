@@ -65,8 +65,16 @@ while True:
         # Bounce off edges
         if body.left < 0 or body.right > width:
             body.velflipx()
+            if body.left < 0:
+                body.setPos(body.radius, body.pos.y)
+            elif body.right > width:
+                body.setPos(width - body.radius, body.pos.y)
         if body.top < 0 or body.bottom > height:
             body.velflipy()
+            if body.top < 0:
+                body.setPos(body.pos.x, body.radius)
+            elif body.bottom > height:
+                body.setPos(body.pos.x, height - body.radius)
         
         # Draw the body
         pygame.draw.circle(screen, blue, pos, round(body.radius))

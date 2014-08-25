@@ -9,6 +9,9 @@ class Thing():
     def __init__(self, x, y):
         self.pos = vector(x, y)
 
+    def setPos(self,x,y):
+        self.pos = vector(x,y)
+
 class Body(Thing):
     # A physical body that allows for translational motion
     def __init__(self, x, y, vx=0, vy=0, ax=0, ay=0, mass=1):
