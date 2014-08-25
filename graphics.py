@@ -11,14 +11,14 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Constants:
-size = width, height = 640, 480
-vmax = .5 * width   # pixels per second
+size = width, height = 500, 500
+vmax = .25 * width   # pixels per second
 black = 0, 0, 0
 blue = 0, 0, 255
 white = 255, 255, 255
-radius = 10
-bgcolor = black
-ballcolor = white
+radius = 1/50 * width 
+bgcolor = white
+ballcolor = blue
 maxfps = 100
 
 # User input:
