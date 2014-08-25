@@ -4,7 +4,7 @@
 import sys, pygame
 import random
 from Bodies import *
-from vector import *
+#from vector import *
 
 # Initialize pygame and pygame clock
 pygame.init()
