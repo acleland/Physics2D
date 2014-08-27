@@ -4,7 +4,6 @@
 import sys, pygame
 import random
 from Bodies import *
-#from vector import *
 
 # Initialize pygame and pygame clock
 pygame.init()
@@ -54,10 +53,8 @@ while True:
         pos = round(body.pos.x), round(body.pos.y)
         
         # Move body according to current velocity, acceleration
-        body.update(dt = 1/maxfps)   # converting ms to secs
+        body.update(dt = 1/maxfps)
 
-
-        
         if collisions_on:
             # Check for collisions
             for other in bodies:
@@ -67,7 +64,6 @@ while True:
                 # Fix overlaps
                 if body.overlaps(other):
                     body.collide(other)
-
 
         # Bounce off edges
         if body.left < 0 or body.right > width:
@@ -86,6 +82,5 @@ while True:
         # Draw the body
         pygame.draw.circle(screen, ballcolor, pos, round(body.radius))
 
-    #screen.blit(ball, ballrect)
     pygame.display.flip()
 
