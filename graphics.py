@@ -19,7 +19,7 @@ white = 255, 255, 255
 radius = 1/50 * width 
 bgcolor = white
 ballcolor = blue
-maxfps = 100
+maxfps = 60
 
 # User input:
 n = int(input('Number of bodies: '))
@@ -54,7 +54,7 @@ while True:
         pos = round(body.pos.x), round(body.pos.y)
         
         # Move body according to current velocity, acceleration
-        body.update(dt=delta_t / 1000)   # converting ms to secs
+        body.update(dt = 1/maxfps)   # converting ms to secs
 
 
         
