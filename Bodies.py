@@ -25,8 +25,8 @@ class Body(Thing):
 
     def update(self, dt=1, force=vector(0, 0)):
         #self.acc = force / self.mass   # Newton's 2nd law
+        self.pos += self.vel * dt + (self.acc * dt**2)/2
         self.vel += self.acc * dt
-        self.pos += self.vel * dt
         self.setBounds()
 
     def velflipx(self):
