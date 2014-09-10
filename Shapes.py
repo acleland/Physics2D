@@ -2,26 +2,27 @@
 # Shape classes for Physics 2D 
 
 from vector import *
+from Bodies import *
 
 class Rect():
-    def __init__(self, pos, width, height):
-        self.x = pos.x
-        self.y = pos.y
+    def __init__(self, thing, width, height):
+        self.thing = thing
         self.width = width
         self.height = height
 
     def intersectsRect(self, other):
         # Conditions for intersecting rectangles (axis aligned)
-        if (self.x < other.x + other.width) and \
-        (self.x + self.width > other.x) and \
-        (self.y < other.y + other.height) and \
-        (self.y + self.height > other.y):
+        if (self.thing.pos.x < other.thing.pos.x + other.width) and \
+        (self.thing.pos.x + self.width > other.thing.pos.x) and \
+        (self.thing.pos.y < other.thing.pos.y + other.height) and \
+        (self.thing.pos.y + self.height > other.thing.pos.y):
             return True
 
         # Otherwise 
         return False
 
 if __name__ == '__main__':
+# Note: these tests need to updated to things as input, rather than vectors
     rect1 = Rect(vector(0,0), 3, 2)
     rect2 = Rect(vector(2,1), 2, 2)
     rect3 = Rect(vector(0,1), 1, 2)
