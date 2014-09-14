@@ -1,4 +1,3 @@
-# Testing git merge
 # Copyright (c) 2014 Andrew Cleland 
 # Shape classes for Physics 2D 
 
